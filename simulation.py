@@ -1,7 +1,6 @@
 from time import perf_counter
 
 import numpy as np
-import numba
 from numba import cuda
 from math import sin
 
@@ -36,9 +35,16 @@ def run_simulation(lattice, lattice_vel, forces, steps):
         update(lattice, lattice_vel, forces, i, j)
         grid.sync()
 
-@numba.njit
-def get_energy(lattice):
-    ...
+def show(grid):
+    from math import pi
+    import matplotlib.pyplot as plt
+    plt.figure()
+    plt.imshow(grid, cmap='hsv', vmin=-pi, vmax=pi, origin='lower')
+    plt.colorbar()
+    plt.show()
+
+def thermodynamic_data(lattice):
+     ...
 
 def main():
     # Setup system size
@@ -50,7 +56,7 @@ def main():
 
     # Set variables on host and device
     lattice = np.random.random(size = (rows, cols))-0.5
-    lattice = np.array(lattice, dtype=np.float32)
+    lattice = np.array(lattice, dtype=np.float32)*3.14
     d_lattice = cuda.to_device(lattice)
     lattice_vel = np.zeros(lattice.shape, dtype=np.float32)
     d_lattice_vel = cuda.to_device(lattice_vel)
@@ -77,6 +83,8 @@ def main():
     print(f"Run, wallclock time: {np.mean(times_run[1:])=:0.2e} +- {np.std(times_run[1:])=:0.2e}")
     print(f"Copy, wallclock time: {np.mean(times_copy[1:])=:0.2e} +- {np.std(times_copy[1:])=:0.2e}")
     print(f"{time_blocks*np.mean(times_run[1:])=:0.5f} s")
+
+    show(lattice)
 
 if __name__ == '__main__':
     main()
