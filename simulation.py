@@ -99,6 +99,14 @@ def energy(lattice):
 def main():
     # Print info for this
     cuda.detect()
+    device = cuda.get_current_device()
+    print(f"Device name: {device.name}")
+    print(f"Compute capability: {device.compute_capability}")
+    print(f"Multiprocessor count: {device.MULTIPROCESSOR_COUNT}")
+    print(f"Max threads per block: {device.MAX_THREADS_PER_BLOCK}")
+    print(f"Max block dimensions: {device.MAX_BLOCK_DIM_X}, {device.MAX_BLOCK_DIM_Y}, {device.MAX_BLOCK_DIM_Z}")
+    print(f"Max grid dimensions: {device.MAX_GRID_DIM_X}, {device.MAX_GRID_DIM_Y}, {device.MAX_GRID_DIM_Z}")
+    print("")
 
     # For timing of device code
     start = cuda.event()
@@ -142,7 +150,7 @@ def main():
         wallclock_times.append(cuda.event_elapsed_time(start_block, end_block))
         lattice = d_lattice.copy_to_host()
 
-        print(f'{i}: energy = {energy(lattice):.3f}, theta[0,0] = {float(lattice[0, 0])}, {wallclock_times[-1] = :0.1f} ms')
+        print(f' {i:>4}: energy = {energy(lattice):.3f}, theta[0,0] = {float(lattice[0, 0]):.3f}, {wallclock_times[-1] = :0.1f} ms')
     end.record()
     end.synchronize()
     total_wallclock_time = cuda.event_elapsed_time(start, end)
