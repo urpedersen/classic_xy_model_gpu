@@ -55,7 +55,7 @@ def update_nvt(lattice, lattice_vel, forces, betas_old, rng_states, x, y):
 
 @cuda.jit(device=True)
 def update_nve(lattice, lattice_vel, forces, x, y):
-    """ Device function for NVT Langevin, Leap-frog, REF: https://arxiv.org/pdf/1303.7011.pdf Sec. 2.C. """
+    """ Device function for NVE leap-frog """
     dt = numba.float32(0.01)
     lattice_vel[x, y] += forces[x, y] * dt
     lattice[x, y] += lattice_vel[x, y] * dt
