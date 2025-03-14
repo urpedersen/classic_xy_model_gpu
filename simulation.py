@@ -48,9 +48,10 @@ def update_nvt(lattice, lattice_vel, forces, betas_old, rng_states, x, y):
     a = numerator / denominator
     b_over_m = two / denominator
     lattice_vel[x, y] = a * lattice_vel[x, y] + b_over_m * forces[x, y] * dt + b_over_m * one_half * (
-                beta_new + betas_old[x, y])
+            beta_new + betas_old[x, y])
     betas_old[x, y] = beta_new
     lattice[x, y] += lattice_vel[x, y] * dt
+
 
 @cuda.jit(device=True)
 def update_nve(lattice, lattice_vel, forces, x, y):
@@ -58,6 +59,7 @@ def update_nve(lattice, lattice_vel, forces, x, y):
     dt = numba.float32(0.01)
     lattice_vel[x, y] += forces[x, y] * dt
     lattice[x, y] += lattice_vel[x, y] * dt
+
 
 @cuda.jit
 def run_simulation(lattice, lattice_vel, forces, betas, rng_states, steps):
@@ -78,7 +80,7 @@ def show(grid):
     from math import pi
     import matplotlib.pyplot as plt
     plt.figure()
-    plt.imshow(grid, cmap='hsv', vmin=-pi, vmax=pi)
+    plt.imshow(grid % (2 * pi)-pi, cmap='hsv', vmin=-pi, vmax=pi)
     plt.colorbar()
     plt.show()
 
@@ -92,12 +94,12 @@ def energy(lattice):
         x2 = (x + dxdy[0]) % rows
         y2 = (y + dxdy[1]) % columns
         delta_theta = lattice[x2, y2] - lattice[x, y]
-        energy -= 0.5*math.cos(delta_theta)
-    return energy/rows/columns
+        energy -= 0.5 * math.cos(delta_theta)
+    return energy / rows / columns
 
 
 def main():
-    # Print info for this
+    # Print info for this GPU
     cuda.detect()
     device = cuda.get_current_device()
     print(f"Device name: {device.name}")
@@ -125,8 +127,8 @@ def main():
     print(f"with {blocks = }, and {threads_per_block = } ")
 
     # Set variables on host and copy to device memory
-    lattice = np.zeros((rows, cols), dtype=np.float32)
-    lattice = np.array(lattice, dtype=np.float32) * 3.14
+    lattice = (np.random.random((rows, cols)) - 0.5) * 2 * np.pi
+    lattice = np.array(lattice, dtype=np.float32)
     d_lattice = cuda.to_device(lattice)
     lattice_vel = np.zeros(lattice.shape, dtype=np.float32)
     d_lattice_vel = cuda.to_device(lattice_vel)
@@ -150,7 +152,8 @@ def main():
         wallclock_times.append(cuda.event_elapsed_time(start_block, end_block))
         lattice = d_lattice.copy_to_host()
 
-        print(f' {i:>4}: energy = {energy(lattice):.3f}, theta[0,0] = {float(lattice[0, 0]):.3f}, {wallclock_times[-1] = :0.1f} ms')
+        print(
+            f' {i:>4}: energy = {energy(lattice):.3f}, theta[0,0] = {float(lattice[0, 0]):.3f}, {wallclock_times[-1] = :0.1f} ms')
     end.record()
     end.synchronize()
     total_wallclock_time = cuda.event_elapsed_time(start, end)
@@ -158,7 +161,7 @@ def main():
 
     print(f"First, wallclock time (compile): {wallclock_times[0] = :0.2f} ms")
     print(f"Other avg. wallclock time: {np.mean(wallclock_times[1:]):0.1f} ms +- {np.std(wallclock_times[1:]):0.1f} ms")
-    delta_t = np.mean(wallclock_times[1:])/1000  # Seconds
+    delta_t = np.mean(wallclock_times[1:]) / 1000  # Seconds
     steps_per_second = steps_per_time_block / delta_t
     print(f"{steps_per_second=:0.2e}")
     spin_updates_per_second = steps_per_second * rows * cols
