@@ -9,33 +9,34 @@ id 0    b'NVIDIA GeForce RTX 4070 Laptop GPU'                              [SUPP
 Summary:
 	1/1 devices are supported
 Device name: b'NVIDIA GeForce RTX 4070 Laptop GPU'
-Compute capability: (8, 9)
+Compute capability: 8.9
 Multiprocessor count: 36
 Max threads per block: 1024
 Max block dimensions: 1024, 1024, 64
 Max grid dimensions: 2147483647, 65535, 65535
 
-Lattice size: 128 x 128 = 16384
-with blocks = (16, 16), and threads_per_block = (8, 8)
-num_time_blocks=16, steps_per_time_block=2048
-    0: energy = -1.784, theta[0,0] = -0.353, wallclock_times[-1] = 322.2 ms
-    1: energy = -1.789, theta[0,0] = -0.716, wallclock_times[-1] = 16.0 ms
-    2: energy = -1.789, theta[0,0] = -0.512, wallclock_times[-1] = 15.9 ms
-    3: energy = -1.788, theta[0,0] = -0.790, wallclock_times[-1] = 15.9 ms
-    4: energy = -1.786, theta[0,0] = -1.487, wallclock_times[-1] = 15.9 ms
-    5: energy = -1.789, theta[0,0] = -0.477, wallclock_times[-1] = 16.8 ms
-    6: energy = -1.792, theta[0,0] = 0.155, wallclock_times[-1] = 18.2 ms
-    7: energy = -1.790, theta[0,0] = -0.095, wallclock_times[-1] = 16.8 ms
-    8: energy = -1.788, theta[0,0] = -1.297, wallclock_times[-1] = 19.4 ms
-    9: energy = -1.789, theta[0,0] = -0.005, wallclock_times[-1] = 19.1 ms
-   10: energy = -1.790, theta[0,0] = 0.253, wallclock_times[-1] = 16.8 ms
-   11: energy = -1.789, theta[0,0] = 0.412, wallclock_times[-1] = 12.2 ms
-   12: energy = -1.791, theta[0,0] = -0.674, wallclock_times[-1] = 12.1 ms
-   13: energy = -1.792, theta[0,0] = -0.268, wallclock_times[-1] = 12.1 ms
-   14: energy = -1.784, theta[0,0] = -0.233, wallclock_times[-1] = 12.1 ms
-   15: energy = -1.788, theta[0,0] = -0.429, wallclock_times[-1] = 13.5 ms
-total_wallclock_time=1297.4 ms
-First, wallclock time (compile): wallclock_times[0] = 322.22 ms
-Other avg. wallclock time: 15.5 ms +- 2.5 ms
-steps_per_second=1.32e+05
-spin_updates_per_second=2.16e+09
+Lattice size: 1024 x 1024 = 1048576
+with tiles = (8, 8), blocks = (16, 16), and threads_per_block = (8, 8)
+num_time_blocks=16, steps_per_time_block=128
+Total number of time steps: 2048
+   0: energy = -0.772, theta[0,0] = 1.679. Wall-clock time: 406.9 ms
+   1: energy = -0.974, theta[0,0] = 1.337. Wall-clock time: 90.9 ms
+   2: energy = -1.170, theta[0,0] = 2.045. Wall-clock time: 78.7 ms
+   3: energy = -1.315, theta[0,0] = 1.466. Wall-clock time: 62.5 ms
+   4: energy = -1.421, theta[0,0] = 0.814. Wall-clock time: 59.9 ms
+   5: energy = -1.500, theta[0,0] = 2.901. Wall-clock time: 60.1 ms
+   6: energy = -1.557, theta[0,0] = 2.106. Wall-clock time: 64.4 ms
+   7: energy = -1.598, theta[0,0] = 2.455. Wall-clock time: 62.6 ms
+   8: energy = -1.627, theta[0,0] = 2.966. Wall-clock time: 59.9 ms
+   9: energy = -1.649, theta[0,0] = 2.948. Wall-clock time: 58.8 ms
+  10: energy = -1.666, theta[0,0] = 1.995. Wall-clock time: 59.3 ms
+  11: energy = -1.679, theta[0,0] = 2.861. Wall-clock time: 64.9 ms
+  12: energy = -1.689, theta[0,0] = 2.265. Wall-clock time: 58.9 ms
+  13: energy = -1.698, theta[0,0] = 1.934. Wall-clock time: 59.1 ms
+  14: energy = -1.704, theta[0,0] = 1.745. Wall-clock time: 58.9 ms
+  15: energy = -1.710, theta[0,0] = 2.384. Wall-clock time: 65.4 ms
+total_wallclock_time = 2075.5 ms
+First, wallclock time (compile): wallclock_times[0] = 406.86 ms
+Other avg. wallclock time: 64.3 ms +- 8.6 ms
+steps_per_second = 1.99e+03
+spin_updates_per_second = 2.09e+09

@@ -1,0 +1,44 @@
+Found 1 CUDA devices
+id 0    b'NVIDIA GeForce RTX 4070 Laptop GPU'                              [SUPPORTED]
+                      Compute Capability: 8.9
+                           PCI Device ID: 0
+                              PCI Bus ID: 1
+                                    UUID: GPU-386bee0d-04cf-27fc-da58-3471e9e255fb
+                                Watchdog: Disabled
+             FP32/FP64 Performance Ratio: 64
+Summary:
+	1/1 devices are supported
+Device name: b'NVIDIA GeForce RTX 4070 Laptop GPU'
+Compute capability: 8.9
+Multiprocessor count: 36
+Max threads per block: 1024
+Max block dimensions: 1024, 1024, 64
+Max grid dimensions: 2147483647, 65535, 65535
+
+Lattice size: 4608 x 4608 = 21233664
+with tiles = (24, 24), blocks = (24, 24), and threads_per_block = (8, 8)
+num_time_blocks=16, steps_per_time_block=128
+Total number of time steps: 2048
+   0: energy = -0.772, theta[0,0] = -1.987. Wall-clock time: 4049.8 ms
+   1: energy = -0.973, theta[0,0] = -1.968. Wall-clock time: 3750.2 ms
+   2: energy = -1.169, theta[0,0] = -2.319. Wall-clock time: 3752.3 ms
+   3: energy = -1.314, theta[0,0] = -3.567. Wall-clock time: 3753.9 ms
+   4: energy = -1.421, theta[0,0] = -2.259. Wall-clock time: 3755.9 ms
+   5: energy = -1.500, theta[0,0] = -1.651. Wall-clock time: 3756.8 ms
+   6: energy = -1.556, theta[0,0] = -2.521. Wall-clock time: 3756.6 ms
+   7: energy = -1.597, theta[0,0] = -2.286. Wall-clock time: 3757.7 ms
+   8: energy = -1.628, theta[0,0] = -1.896. Wall-clock time: 3759.6 ms
+   9: energy = -1.650, theta[0,0] = -1.938. Wall-clock time: 3760.4 ms
+  10: energy = -1.667, theta[0,0] = -2.218. Wall-clock time: 3761.8 ms
+  11: energy = -1.680, theta[0,0] = -1.404. Wall-clock time: 3763.2 ms
+  12: energy = -1.690, theta[0,0] = -1.606. Wall-clock time: 3762.4 ms
+  13: energy = -1.699, theta[0,0] = -1.755. Wall-clock time: 3764.7 ms
+  14: energy = -1.705, theta[0,0] = -2.878. Wall-clock time: 3764.0 ms
+  15: energy = -1.711, theta[0,0] = -3.134. Wall-clock time: 3766.1 ms
+total_wallclock_time=65028.7 ms
+First, wallclock time (compile): wallclock_times[0] = 4049.77 ms
+Other avg. wallclock time: 3759.0 ms +- 4.6 ms
+steps_per_second=3.41e+01
+spin_updates_per_second=7.23e+08
+
+Process finished with exit code 0
